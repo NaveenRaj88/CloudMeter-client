@@ -25,12 +25,22 @@ public class CloudMeterClientController {
                             String.format(template, name));
     }
     
+    public static void main(String[] args) throws Exception {
+    	FileInputStream in = new FileInputStream("/Users/anandran/apache-jmeter-2.13/bin/jmeter.properties");
+    	while(in.read()!=-1){
+//    		System.out.println(in.read());
+    	}
+    	
+		CloudMeterClientController cl = new CloudMeterClientController();
+		cl.startJmeter();
+	}
+    
     @RequestMapping("/runjmeter")
     public String startJmeter() throws Exception {
         StandardJMeterEngine jmeter = new StandardJMeterEngine();
      // Initialize Properties, logging, locale, etc.
-        JMeterUtils.loadJMeterProperties("/path/to/your/jmeter/bin/jmeter.properties");
-        JMeterUtils.setJMeterHome("/path/to/your/jmeter");
+        JMeterUtils.loadJMeterProperties("/Users/anandran/apache-jmeter-2.13/bin/jmeter.properties");
+        JMeterUtils.setJMeterHome("//Users/anandran/apache-jmeter-2.13");
         JMeterUtils.initLogging();// you can comment this line out to see extra log messages of i.e. DEBUG level
         JMeterUtils.initLocale();
 
@@ -38,7 +48,7 @@ public class CloudMeterClientController {
         SaveService.loadProperties();
 
         // Load existing .jmx Test Plan
-        FileInputStream in = new FileInputStream("/path/to/your/jmeter/extras/Test.jmx");
+        FileInputStream in = new FileInputStream("/Users/anandran/apache-jmeter-2.13/extras/HTTP_Request2.jmx");
         HashTree testPlanTree = SaveService.loadTree(in);
         in.close();
 
